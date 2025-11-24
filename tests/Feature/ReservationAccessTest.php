@@ -16,7 +16,8 @@ class ReservationAccessTest extends TestCase
     public function admin_can_view_all_reservations()
     {
         $admin = User::factory()->create(['is_admin' => true]);
-        $reservation = Reservation::factory()->create();
+        $user = User::factory()->create();
+        $reservation = Reservation::factory()->for($user)->create();
 
         $response = $this->actingAs($admin)->getJson('/api/reservations');
 
